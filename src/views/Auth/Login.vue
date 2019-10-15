@@ -3,8 +3,8 @@
     <h1>{{pageName}} - {{description}}</h1>
 
     <div>
-      <form onSubmit.prevent>
-        <div class="col-md-6">
+      <form @submit.prevent="login" class="col-md-12">
+        <div class="col-md-6 col-md-offset-3">
           <input type="email" name="email" v-model="user.email" class="form-control" />
           <br />
           <input type="password" name="password" v-model="user.password" class="form-control" />
@@ -26,6 +26,29 @@ export default {
       description: "This is the Login Page",
       user: {}
     };
+  },
+  methods: {
+    login() {
+      this.$axios
+        .post("https://reqres.in/api/login", this.user)
+        .then(response => {
+          console.log(response.data.token);
+          this.$store.dispatch("loginSuccess", response.data);
+          this.$router.push({ name: "home" });
+        })
+        .catch(exception => {
+          console.log(exception);
+        });
+    },
+
+    checkAuthenticatedUser() {
+      if (this.$store.getters.user_token !== "") {
+        this.$router.push("home");
+      }
+    }
+  },
+  mounted() {
+    this.checkAuthenticatedUser();
   }
 };
 </script>

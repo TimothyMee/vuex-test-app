@@ -10,9 +10,23 @@
 import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
+  data() {
+    return {};
+  },
   name: "home",
   components: {
     HelloWorld
+  },
+
+  methods: {
+    checkAuthenticatedUser() {
+      if (this.$store.getters.user_token === "") {
+        this.$router.push("login");
+      }
+    }
+  },
+  mounted() {
+    this.checkAuthenticatedUser();
   }
 };
 </script>
