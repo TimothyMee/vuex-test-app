@@ -455,11 +455,9 @@ export default {
     }
   },
 
-  created() {
-    console.log(
-      "here",
-      document.querySelector(".VueTables__search-field label")
-    );
+  mounted() {
+    document.querySelector(".VueTables__search-field label").style.display =
+      "none";
   }
 };
 </script>
