@@ -39,16 +39,8 @@ export default {
         .catch(exception => {
           console.log(exception);
         });
-    },
-
-    checkAuthenticatedUser() {
-      if (this.$store.getters.user_token !== "") {
-        this.$router.push("home");
-      }
     }
   },
-  mounted() {
-    this.checkAuthenticatedUser();
-  }
+  mounted() {}
 };
 </script>
